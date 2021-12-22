@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>使用call apply借用原型链</h2>
+	</body>
+	<script>
+		let arr = {
+			name: [],
+			data: [1, 2, 100, 5, 1092,24, 67, 98],
+		};
+		Object.setPrototypeOf(arr, {
+			max() {
+				return this.data.sort((a, b) => b - a)[0]
+			}
+		})
+		console.log(arr.max());
+		let score = {
+			lessons:{js:100,php:98,java:98},
+			get data(){
+				return Object.values(this.lessons)
+			}
+		}
+		console.log(arr.max.apply(score));
+		console.log(Math.max.apply(null,Object.values(score.data)));
+		console.log(Math.max.call(null,...Object.values(score.data)));
+	</script>
+</html>

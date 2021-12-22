@@ -1,0 +1,91 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-10 08:41:11
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-10 09:16:42
+ * @FilePath: \notejs\point\居中布局.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .center {
+        background-color: skyblue;
+        margin: 20px 0;
+        padding: 20px;
+        min-height: 300px;
+        box-sizing: border-box;
+    }
+
+    .inner {
+        background-color: rgb(230, 138, 19);
+        min-height: 50px;
+        color: #fff;
+        text-align: center;
+    }
+
+    /* flex布局 */
+    .center1 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .center1 .inner {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* table布局 */
+    .center2 {
+        display: table;
+        width: 100%;
+    }
+
+    .center2 .inner {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .center3 {
+        text-align: center;
+    }
+
+    .center3 .inner {
+        display: inline-block;
+    }
+
+    .center4 {
+        display: table-cell;
+        text-align: center;
+        vertical-align: middle;
+        width: 100%;
+    }
+</style>
+
+<body>
+    <div class="center center3">
+        <div class="inner">水平居中 子:inline-block;父：text-align:center</div>
+    </div>
+    <div class="center center1">
+        <div class="inner">flex布局</div>
+    </div>
+    <div class="center center2">
+        <div class="inner">父table 子table-cell;middle;子元素会撑满父元素</div>
+    </div>
+    <div class="center center4">
+        <div class="inner">父table 子table-cell;middle;子元素会撑满父元素</div>
+    </div>
+</body>
+
+</html>

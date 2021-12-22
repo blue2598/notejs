@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	// "use strict"
+	let obj = {
+		name:"ysl",
+		sex:"女",
+	}
+	/* preventExtensions:禁止向对象添加属性 */
+	// console.log(obj);
+	// console.log(Object.getOwnPropertyDescriptors(obj))
+	// Object.preventExtensions(obj);
+	// obj.age = 18;
+	// obj.name = "244";
+	// console.log(obj)
+	
+	/* seal:封闭对象：禁止增删  已有的属性仍可更改*/
+	// Object.seal(obj);
+	// console.log(Object.getOwnPropertyDescriptors(obj));
+	// obj.name = "jmm";
+	// obj.age = 19;
+	// delete obj.name;
+	// console.log(obj);
+	
+	// freeze
+	Object.freeze(obj);
+	console.log(obj);
+	console.log(Object.getOwnPropertyDescriptors(obj));
+	for(let key in obj){
+		console.log(key);
+	}
+</script>

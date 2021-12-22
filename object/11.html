@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" validate rules="min:5,max:10" />
+		<input type="text" validate rules="min:5,isNumber" />
+		<input type="text" rules="min:5,isNumber" />
+	</body>
+</html>
+<script>
+	"use strict";
+	//使用代理验证表单输入
+	// 验证规则函数
+	class Validate {
+		max(value, length) {
+			return value.trim().length <= length
+		}
+		min(value, length) {
+			return value.trim().length >= length
+		}
+		isNumber(value) {
+			return !isNaN(value)
+		}
+	}
+	//代理工厂函数   批量创建代理
+	function proxyFactories(target) {
+		return new Proxy(target, {
+			set(target, key, el) {
+				let rule = el.getAttribute('rules').split(",");
+				let validate = new Validate();
+				let state = rule.every(item=>{
+					let r = item.split(":");
+					// r[0]:min;r[1]:length;
+					// validata.min("342342",5)
+					return validate[r[0]](el.value,r[1]);//验证是否通过
+				})
+				state ? el.style.border = '10px solid #333' :el.style.border = '10px solid red';
+				return true
+			},
+			get(target, key, value) {
+				return target[key]
+			},
+		})
+	}
+	// 需要验证的表单
+	const proxy = proxyFactories(document.querySelectorAll("[validate]"));
+	// 鼠标弹起
+	proxy.forEach((item,i) => {
+		item.addEventListener('keyup',function(){
+			proxy[i] = this;//为了触发proxy里的set
+		})
+	})
+</script>

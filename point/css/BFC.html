@@ -1,0 +1,103 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-14 14:29:47
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-14 14:48:15
+ * @FilePath: \notejs\point\css\BFC.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .parent {
+            background-color: pink;
+            padding: 20px;
+            /* BFC可以解决浮动元素引起的父元素高度塌陷： */
+            /* float: left; */
+            /* position: fixed; */
+            overflow: hidden;
+            /* 四种解决方式中较好的一种 */
+            /* display: inline-block; */
+        }
+
+        .son {
+            width: 100px;
+            height: 100px;
+            background-color: skyblue;
+            float: left;
+            margin: 20px;
+        }
+
+        .f1 {
+            background-color: #000;
+            height: 50px;
+        }
+
+        .p1 {
+            margin: 10px;
+            background-color: pink;
+            height: 20px;
+        }
+
+        .f1 {
+            /* BFC解决margin塌陷 */
+            overflow: hidden;
+        }
+
+        .f2 {
+            background-color: #000;
+            overflow: hidden;
+        }
+
+        .p2 {
+            width: 200px;
+            float: left;
+            height: 20px;
+            background-color: blue;
+        }
+
+        .p2-last {
+            background-color: #999;
+            height: 70px;
+        }
+    </style>
+</head>
+
+<body>
+    <p>概念：独立的渲染区域，只有Block-level box参与， 它规定了内部的Block-level Box如何布局，该区域拥有一套渲染规则来约束盒子内部如何布局，并且与这个区域外部毫不相干。</p>
+    <p>现象：一个盒子设置高度，当他的所有子元素都为浮动，盒子高度会塌陷</p>
+    <p>解决：</p>
+    <ul>
+        <li>1、父元素的float补位none</li>
+        <li>2、父元素的position不为static或者relative、sticky</li>
+        <li>3、父元素overflow: hidden;</li>
+        <li>4、父元素display:inline-block、flex或者inline-flex</li>
+    </ul>
+    <div class="parent">
+        <div class="son"></div>
+        <div class="son"></div>
+        <div class="son"></div>
+    </div>
+    <p>其他现象</p>
+    <ul>
+        <li>margin塌陷</li>
+        <li>浮动覆盖</li>
+    </ul>
+    <div class="f1">
+        <p class="p1">设置了margin</p>
+    </div>
+    <div class="f2">
+        <p class="p2">浮动元素</p>
+        <p class="p2">浮动元素</p>
+        <p class="p2-last"></p>
+    </div>
+</body>
+
+</html>

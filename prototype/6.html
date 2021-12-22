@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h3>原型中的constructor引用</h3>
+	</body>
+	<script>
+		function User(name){
+			this.name = name;
+		}
+		// 通过原型中的constructor可以找到其构造函数
+		console.dir(User.prototype.constructor == User);
+		// 因此：
+		let ysl = new User("ysl");
+		console.log(ysl);
+		// 同样可以这样实例化出来一个对象
+		let yyy = new User.prototype.constructor("羊羊羊");
+		console.log(yyy);
+	</script>
+</html>

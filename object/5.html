@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+  <script>
+    // assign
+    // Object.assign(target, ...sources)
+    // 拷贝源对象自身的并且可枚举的属性到目标对象。
+    let a = {
+      name:"a",
+      value:"value-a"
+    };
+    let b = {};
+    Object.assign(b,a)
+    b.name = "b";b.value="value-b";
+    console.log(a)
+    console.log(b);
+    let c = {
+      name:"c",
+      value:["c"],
+    }
+    let d = {};
+    Object.assign(d,c);
+    d.value.push("d");
+    console.log(c)
+    console.log(d);
+
+    console.log(Object.assign([1,2,3],[4,5,6,7]));
+    Object.freeze(d);
+    d.name = "d";
+    console.log(d)
+    let e = {};
+    Object.assign(e,d)
+    e.name = 'e';
+    console.log(e)
+  </script>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>错误监测catch</h1>
+		<p>如果then里面没有错误处理，catch会捕捉到错误</p>
+		<p>链式调用then时，如果最后一个catch前面的then都没有错误处理，那最后一个catch可以捕捉到前面所有的错误</p>
+		<p>包括throw new Error()里面的和reject()抛出的错误</p>
+		<p>推荐做法：将catch放在链式最后一个</p>
+	</body>
+	<script>
+		new Promise((resolve, reject) => {
+			resolve("成功")
+		}).then(res => {
+			throw new Error("错误")
+		}).then(res => {
+			console.log(re1s);
+		}).catch(err => {
+			console.log(err);
+		}).finally(() => {
+			// 可以在这里关闭加载动画
+			console.log("可以在这里关闭加载动画");
+		})
+	</script>
+</html>

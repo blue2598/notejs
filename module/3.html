@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="module">
+			console.log(document.querySelectorAll("h3"));
+			console.log(this);
+			let bar = "this is a module bar";
+		</script>
+		<script>
+			// 这里是空的
+			console.log(document.querySelectorAll("h3"));
+			console.log(this)
+			let normalbar = "this is a normal bar";
+			console.log(bar);//bar is not defined
+		</script>
+		<script>
+			console.log(normalbar);
+		</script>
+	</head>
+	<body>
+		<h3>模块的延迟解析：即使放入head标签中也是后解析的</h3>
+		<h3>模块的使用严格模式，例如打印this</h3>
+		<h3>模块有自己独立的作用域</h3>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+	</head>
+	<body>
+		<h3>使用super()访问父类方法</h3>
+	</body>
+	<script>
+		class Constroller {
+			sum(data) {
+				return data.reduce((c, v) => c + v.price, 0)
+			}
+		}
+		class Lessson extends Constroller {
+			constructor(data) {
+				super();
+				this.data = data;
+			}
+			getTotal() {
+				return {
+					totalPrice: super.sum(this.data),
+					data: this.data
+				}
+			}
+		}
+		let less = [{
+			name: "js",
+			price: 1899
+		}, {
+			name: 'php',
+			price: 2999
+		}, {
+			name: "java",
+			price: 3999
+		}]
+		let ysl = new Lessson(less);
+		console.log(ysl);
+		console.log(ysl.getTotal());
+		
+	</script>
+</html>

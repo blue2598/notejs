@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+
+	</style>
+	<body>
+		<button class="prev">上一节</button>
+		<div id="app">
+			<h1>组件</h1>
+			<p>实现应用中局部功能代码和资源的集合</p>
+			<ul>
+				<li>创建组件</li>
+				<li>注册组件</li>
+				<li>使用组件</li>
+			</ul>
+			<p>使用组件：</p>
+			<School></School>
+			<hr >
+			<Student></Student>
+			<p>自闭标签在非脚手架环境下，只会解析一次</p>
+			<Student />
+			<Student />
+			<Student />
+			<Student />
+			<p>命名规则</p>
+			<span>一个单词组成</span>
+			<ul>
+				<li>首字母大写</li>
+				<li>首字母小写写</li>
+			</ul>
+			<span>多个个单词组成</span>
+			<ul>
+				<li>kebab-case写法：my-component</li>
+				<li>CamelCase:MyComponent(需要vue脚手架支持)</li>
+			</ul>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+		<script src="./change.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// 这里可以直接写对象，vue也会识别并执行Vue.extend方法
+			// 本质是构造函数
+			const School = Vue.extend({
+				template:`<div>学校:{{name}},地址：{{address}}</div>`,
+				data() {
+					// 这里必须是函数式声明
+					return {
+						name: "学校名",
+						address: "学校地址"
+					}
+				}
+			})
+			const Student = Vue.extend({
+				template:`<div>姓名:{{name}},年龄：{{age}}</div>`,
+				data() {
+					// 这里必须是函数式声明
+					return {
+						name: "学生名",
+						age: 20
+					}
+				}
+			})
+			new Vue({
+				el: "#app",
+				data() {
+					return {}
+				},
+				components: {
+					School,Student
+				},
+				methods: {
+
+
+				}
+			});
+		</script>
+
+	</body>
+</html>

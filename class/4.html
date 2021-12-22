@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+	</head>
+	<body>
+		<h3>使用静态属性的例子</h3>
+	</body>
+	<script>
+		let goods = [{
+				name: "肥皂",
+				price: 20
+			},
+			{
+				name: "毛巾",
+				price: 10
+			},
+			{
+				name: "衣架",
+				price: 9.9
+			},
+			{
+				name: "挂钩",
+				price: 19.9
+			}
+		]
+		class Goods {
+			constructor(data) {
+				this.model = data;
+			}
+			get name() {
+				return this.model.name
+			}
+			get price() {
+				return this.model.price
+			}
+			static create(data) {
+				let arr = data.map((item) => {
+					return item = new this(item);
+				})
+				return arr
+			}
+			static maxPrice(data) {
+				return data.sort((a, b) => b.name - a.name)[0]
+			}
+		}
+		let goodsModel = Goods.create(goods);
+		console.log(Goods.maxPrice(goodsModel));
+	</script>
+</html>

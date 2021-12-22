@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<input type="text" v-model="msg" />
+		<input type="text" v-model="msg" />
+		<h4 v-bind=msg>这里也要更新</h4>
+	</body>
+</html>
+<script>
+	"use strict";
+	// vuejs数据双向绑定原理
+	function View() {
+		let proxy = new Proxy({}, {
+			get(obj, property) {
+				return obj[property]
+			},
+			set(obj, property, value) {
+				document.querySelectorAll("[v-model="+property+"]").forEach(item => {
+					item.value = value;
+				})
+				document.querySelectorAll("[v-bind="+property+"]").forEach(item => {
+					item.innerHTML = value;
+				})
+				return true
+			}
+		});
+		this.init = function() {
+			document.querySelectorAll("[v-model]").forEach(item => {
+				item.addEventListener('keyup', function() {
+					proxy[item.getAttribute("v-model")] = this.value;
+				})
+			})
+		}
+	}
+	new View().init();
+</script>

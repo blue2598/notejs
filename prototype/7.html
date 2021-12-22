@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h3>根据对象再创建一个对象</h3>
+		<p>原理：构造函数创建的对象原型下的constructor可以找到该构造函数</p>
+	</body>
+	<script>
+		function User(name){
+			this.name = name;
+			this.show = function(){
+				return this.name
+			}
+		}
+		let ysl = new User("ysl");
+		// 通过一个对象创建另一个对象
+		function createObjByObject(obj,args){
+		function createObjByObject(obj,args){
+			let constructor =  obj.__proto__.constructor;
+			return new constructor(args)
+		}
+		let yyy = createObjByObject(ysl,'yyy');
+		console.log(yyy);
+		console.log(yyy.show());
+	</script>
+</html>

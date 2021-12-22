@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>面向对象的多态</h2>
+	</body>
+	<script>
+		function User(){}
+		User.prototype.show = function(){
+			return this.description();
+		}
+		User.prototype.description = function(){
+			return "我是普通用户"
+		}
+		
+		// 继承User
+		function Member(){}
+		Member.prototype = Object.create(User.prototype);
+		Object.defineProperty(Member.prototype,"constructor",{
+			value:Member,
+			enumerable:false,
+		})
+		Member.prototype.description = function(){
+			return "我是普通会员"
+		}
+		
+		// 继承User
+		function SuperMember(){}	
+		SuperMember.prototype = Object.create(User.prototype);
+		Object.defineProperty(SuperMember.prototype,"constructor",{
+			value:SuperMember,
+			enumerable:false,
+		})
+		SuperMember.prototype.description = function(){
+			return "我是超级会员"
+		}
+		for (let obj of [new User(),new Member(),new SuperMember()]) {
+			console.log(obj.show());
+		}
+	</script>
+</html>

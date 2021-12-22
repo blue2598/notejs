@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			p{
+				position: absolute;
+			}
+		</style>
+	</head>
+	<body>
+		<p>这是一条弹幕</p>
+	</body>
+	<script>
+		function interval(duration = 1000, callback) {
+			let id = setInterval(() => {
+				callback(id)
+			}, duration)
+		}
+		interval(50,(id)=>{
+			let p = document.querySelector("p");
+			let pLeft = window.getComputedStyle(p).left.slice(0,-2) * 1;
+			p.style.left =pLeft+10+"px";
+			if(pLeft>200){
+				clearInterval(id);
+				interval(50,(id)=>{
+					p.style.color = "red";
+					p.style.opacity = window.getComputedStyle(p).opacity-0.1;
+					if(p.style.opacity<=0){
+						clearInterval(id);
+					}
+				})
+			}
+		})
+
+	</script>
+</html>

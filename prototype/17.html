@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>js无法多继承,只能链式一级一级继承：造成混乱</h2>
+		<p>例如Admin继承了User，就无法继承Address，但是可以让User继承Address,这样Admin就可以使用到Address的方法了</p>
+		<h2>js使用mixin实现多继承</h2>
+	</body>
+	<script>
+		
+		function User() {}
+		function Member(){}
+		function Admin(){}
+		// 将方法放在对象中
+		const show = {
+			show(){
+				console.log("show方法");
+			}
+		}
+		const Request ={
+			getRequest(){
+				return "请求后台"
+			}
+		}
+		const Address = {
+			__proto__:request,
+			getAddress(){
+				console.log(super.getRequest() + "地址");
+			}
+		}
+		const membership = {
+			getMember(){
+				console.log(membership);
+			}
+		}
+		User.prototype = Object.assign(User.prototype,show,Address);
+		Admin.prototype = Object.assign(Admin.prototype,show,membership);
+		let ysl = new User();
+		ysl.getAddress()
+		console.dir(Request);
+	</script>
+</html>

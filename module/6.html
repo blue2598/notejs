@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h3>合并导入</h3>
+		<p>新建一个专门的js文件批量导入模块，再导出；为了防止重名，因此可以起个别名</p>
+	</body>
+	<script type="module">
+		import {m2,m4,m5} from "./6.js";
+		console.log(m2)
+		console.log(m4)
+		console.log(m5)
+		let user =  m2.showName();
+		console.log(user)
+	</script>
+</html>

@@ -1,0 +1,45 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-15 13:45:47
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-15 14:03:54
+ * @FilePath: \notejs\point\js\对象操作.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let a = {
+            b: 1
+        }
+        console.log(Object.getPrototypeOf(a));
+        console.log(Object.getOwnPropertyDescriptor(a, 'b'));
+        let c = {};
+        Object.defineProperty(c, "b", {
+            value: 3,
+            writable: true,//控制是否可更改属性,
+            configurable: true,//是否可删除
+            enumerable: false,//是否可遍历
+        })
+        console.log(Object.getOwnPropertyDescriptor(c, 'b'));
+        c.b = 4;
+        c.d = 5;
+
+        console.log(c);
+        for (const key in c) {
+            console.log(key);
+        }
+    </script>
+</body>
+
+</html>

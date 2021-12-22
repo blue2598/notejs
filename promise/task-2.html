@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.load {
+				height: 20px;
+				color: #fff;
+				background-color: #1ABC9C;
+				width: 0;
+				text-align: right;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>任务拆分为多个任务</h3>
+		<p>以免执行速度过慢影响后面的同步任务</p>
+	</body>
+	<script src="js/ajax.js"></script>
+	<script>
+		
+		function addNum1() {
+			let j=num;
+			for (let i = 0;i<j; i++) {
+				count += num--;
+			}
+			console.log(count);
+		}
+		let num = 987654321;
+		let count = 0;
+
+		function addNum2() {
+			for (let i = 0; i < 10000000; i++) {
+				if (num <= 0) break;
+				count += num--;
+			}
+			if (num > 0) {
+				setTimeout(addNum2);
+			}
+			console.log(num)
+			console.log(count);
+		}
+		// addNum1();
+		addNum2();
+		console.log("同步任务");
+	</script>
+</html>

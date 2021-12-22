@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h3>按需加载模块</h3>
+		<p>import()方法:会返回一个promise对象</p>
+		<button class="button">点击</button>
+	</body>
+	<script type="module">
+		import("./6.js").then(module=>{
+			console.log(module)
+		})
+		// 比如：点击按钮之后使用这个模块
+		document.querySelector(".button").addEventListener('click',()=>{
+			import("./5.js").then(module=>{
+				let ysl = new module.default("ysl");
+				console.log(ysl)
+			})
+		})
+	</script>
+</html>

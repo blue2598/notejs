@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>then也是一个promise</h1>
+	</body>
+	<script>
+		// fun1();
+		fun2();
+
+		function fun1() {
+			let p1 = new Promise((resolve, reject) => {
+				// resolve("成功")
+				reject("失败")
+			})
+			let p2 = p1.then(res => {
+				console.log(res);
+			}, err => {
+				console.log(err);
+			})
+			console.log(p1)
+			console.log(p2)
+		}
+
+		function fun2() {
+			let p1 = new Promise((resolve, reject) => {
+				// resolve("成功")
+				reject("失败");
+			})
+			let p2 = p1.then(res => {
+				console.log("成功了：" + res);
+			}, err => {
+				console.log("失败了：" + err);
+			}).then(res => console.log("是上一个promise的结果，上一个promise的结果默认返回成功，所以不管p1是成功还是失败，这里都是成功"), err => console.log(
+				err))
+			setTimeout(() => {
+				console.log(p1)
+				console.log(p2)
+			})
+		}
+	</script>
+</html>

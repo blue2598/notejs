@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>Promise语法糖 async/await</h1>
+		<p>await相当于then语法糖</p>
+	</body>
+	<script src="js/ajax.js"></script>
+	<script>
+		async function User() {
+			this.getName = function() {
+				return "ysl"
+			}
+			let site = await new Promise(resolve => {
+				setTimeout(() => {
+					console.log("site");
+					resolve(0); //这里如果不处理结果 ，底下的代码就不会继续执行
+				}, 3000)
+			});
+			console.log(site);
+			// 相当于promise的第二个then  如果上一个没有处理，这里不执行
+			let name = await this.getName();
+			console.log(name);
+		}
+		console.log(User());
+
+		async function getDetail(url) {
+			let data = await Request(url + "?type=1");
+			data = JSON.parse(data);
+			// 这里data2需要data的结果作为参数
+			let data2 = await Request(url + "?type=2&id="+data.data[0].id);
+			console.log(data2);
+		}
+		getDetail("/productlist")
+	</script>
+</html>

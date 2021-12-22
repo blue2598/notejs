@@ -1,0 +1,115 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-13 16:14:07
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-13 16:58:36
+ * @FilePath: \notejs\point\js\循环.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [6, 7, 8, 9, 10];
+        console.log("*******************for*****************");
+        for (let i = 0; i < arr.length; i++) {
+            console.log("for循环", arr[i]);
+        }
+        console.log("*******************for of*****************");
+        for (let value of arr) {
+            console.log("for of", value);
+        }
+        console.log("*******************for in*****************");
+        for (let key in arr) {
+            console.log("for of", key);
+        }
+        console.log("*******************for of keys()*****************");
+        for (let key of arr.keys()) {
+            console.log("for of keys()", key);
+        }
+        console.log("*******************for of values()*****************");
+        for (let value of arr.values()) {
+            console.log("for of values()", value);
+        }
+        console.log("*******************for of entries()*****************");
+        for (let [key, value] of arr.entries()) {
+            console.log("for of entries()", value);
+        }
+        console.log("*******************map*****************");
+        let newArr = arr.map((item, index, arr) => {
+            console.log(item, index, arr);
+            return item + 2;
+        })
+        console.log(arr);
+        console.log(newArr);
+        console.log("*******************map*****************");
+        let arr1 = [{ name: 1, value: 1 }, { name: 2, value: 2 }, { name: 3, value: 3 }];
+        let newArr1 = arr1.map(item => {
+            return item.value + 2
+        })
+        let newArr2 = arr1.map(item => {
+            item.value = item.value + 2;
+            return item
+        })
+        console.log(arr1);
+        console.log(newArr1);//
+        console.log(newArr2);//
+        console.log("*******************forEach*****************");
+        let newArr3 = arr1.forEach(item => {
+            item.value = item.value + 2;
+        })
+        console.log(arr1);
+        console.log(newArr3);//undefined
+        let newArr4 = [];
+        console.log("*******************使用抛出异常停止循环*****************");
+        try {
+            arr1.forEach(item => {
+                if (item.value > 5) {
+                    newArr4.push(item);
+                    throw new Error("停止")
+                }
+            })
+        } catch (err) {
+            console.log(err);
+        }
+        console.log(newArr4);
+        console.log("*******************splice(index,howmany,replaceElem1,replaceElem2)*****************");
+        console.log(arr.splice(0, 2, 10, 11, 234));//裁切从0开始的2个元素，返回被裁切的部分，会改变原数组
+        console.log(arr);
+        console.log("*******************slice(startI,endI)接受负值、不包括endI*****************");
+        console.log(arr.slice(0, 2));//返回被从索引0开始到索引为2的元素，不会改变原数组
+        console.log(arr);
+        console.log(arr.slice(0, -2));
+        console.log(arr.slice(-5, -3));
+        console.log("*******************unshift、shift*****************");
+        arr.unshift(0);
+        console.log(arr);
+        console.log(arr.shift());
+        console.log("*******************sort、reverse*****************");
+        console.log(arr.sort());//改变了原数组
+        console.log(arr);
+        console.log(arr.reverse());
+        console.log(arr);//改变了原数组
+        console.log("*******************find、findIndex*****************");
+        console.log(arr.find(item => item > 2));
+        console.log(arr.findIndex(item => item > 2));
+        console.log("*******************indexOf、lastIndexOf、includes*****************");
+        console.log(arr.indexOf(10));
+        console.log(arr.lastIndexOf(10));
+        console.log(arr.includes(999));
+        console.log("*******************some、every*****************");
+        console.log(arr.some(item => item > 10));
+        console.log(arr.every(item => item > 10));
+    </script>
+</body>
+
+</html>

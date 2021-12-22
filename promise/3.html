@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<p>文件依赖</p>
+		<p>异步操作</p>
+		<p>可以看到是主线程的123先打印出来来</p>
+		<p>同样的ajax请求也是如此 如果后一个请求需要前一个请求的结果作为参数，就要把后一个请求放进前一个请求的回调函数中</p>
+	</body>
+	<script>
+		function loadSrc(src, callback) {
+			let script = document.createElement('script');
+			script.src = src;
+			document.body.appendChild(script);
+			script.onload = callback;
+		}
+		// 若果一个文件依赖另一个文件的话
+		// 因为文件加载没有先后顺序，谁先加载完成谁先回调，如果这样写，偶尔会出现报错
+		/* ReferenceError: showJs is not defined at show (3.2.js:2) at HTMLScriptElement.loadSrc (3.html:21) */
+		loadSrc("./js/3.1.js", () => {
+			showJs();
+		})
+		loadSrc("./js/3.2.js", () => {
+			show();
+		})
+		// 这样写就不会出现问题，但是多层嵌套
+		// loadSrc("./js/3.1.js", () => {
+		// 	loadSrc("./js/3.2.js", () => {
+		// 		show();
+		// 	})
+		// })
+		console.log(123);
+	</script>
+</html>

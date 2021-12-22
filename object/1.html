@@ -1,0 +1,92 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-07-30 09:44:37
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-08-31 16:23:47
+ * @FilePath: \vue-js-point\1.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+    function bibao() {
+        var a = 0;
+        var add = function () { a = a + 6; console.log(a) }
+        add()
+    }
+    console.log(bibao())
+
+    function callFn(color, length) {
+        console.log(this.name + this.age + color + length)
+    }
+    let cat = {
+        name: "小猫",
+        age: 20,
+    }
+    // callFn.call(cat, "white", 50);
+    // callFn.apply(cat, ["white", 50]);
+    callFn.bind(cat, "white", 50)();
+    var promise = new Promise(function (resolve, reject) {
+        // 异步处理
+        // 处理结束后、调用resolve 或 reject
+        setTimeout(function () {
+            resolve("成功!"); //代码正常执行！
+        }, 250);
+    });
+    promise.then(function (successMsg) {
+        //successMessage的值是上面调用resolve(...)方法传入的值.
+        //successMessage参数不一定非要是字符串类型
+        console.log(successMsg)
+    })
+    console.log(promise);
+    let user = "ysl";
+
+    console.log(taggg`你是谁${user}你你你`);
+    function taggg(string, arg2, arg3) {
+        console.log(string, arg2, arg3)
+    }
+    let arr = [{
+        name: "百度网站1",
+        site: "www.baidu.com"
+    },
+    {
+        name: "谷歌网站",
+        site: "www.google.com"
+    },
+    {
+        name: "搜狐网站",
+        site: "www.souhu.com"
+    },
+    {
+        name: "腾讯网站2",
+        site: "www.tencent.com"
+    },
+    ];
+    let template = `<ul>
+            ${arr.map(item => {
+        return (link`<li>名称：${item.name}，地址：${item.site}</li>`)
+    }).join("")
+        }
+        </ul>`;
+    document.write(template);
+    function link(str, ...args) {
+        return str.map((item, index) => {
+            return item + (args[index] ? args[index].replace("www", "http://www") : "")
+        }).join()
+    }
+</script>
+
+</html>

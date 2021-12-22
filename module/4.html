@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h3>模块的导入导出</h3>
+		<p>具名导出</p>
+	</body>
+	<script type="module">
+		// 分别导入
+		// import {ssss,User} from "./4.js";
+		// let ysl = new User("ysl");
+		// console.log(ysl)
+
+		// 批量导入
+		import * as js4 from "./4.js";
+		let ysl = new js4.User("ysl");
+		console.log(ysl)
+	</script>
+</html>

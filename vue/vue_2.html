@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<button class="prev">上一节</button>
+		<button class="next">下一节</button>
+		<div id="app">
+			<p>数据代理，有两个对象obj1、obj2，可以用过obj2更改、读取obj1属性的值</p>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+	<script src="./change.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let vm = new Vue({
+				data(){
+					return{
+						name:"data name"
+					}
+				}
+			});
+			vm.$mount("#app");
+			console.log(vm);
+			// 数据代理，有两个对象obj1、obj2，可以用过obj2更改、读取obj1属性的值
+			let obj1 = {
+				name:"ysl",
+				address:"安徽省合肥市",
+				sex:"女"
+			}
+			let obj2 = {};
+			 for(let key in obj1){
+				Object.defineProperty(obj2,key,{
+					get(){
+						return obj1[key]
+					},
+					set(value){
+						obj1[key] = value;
+					}
+				})
+			 }
+			
+			console.log(obj2);
+			obj2.name = 9;
+			console.log(obj2);
+			console.log(obj1);
+		</script>
+	</body>
+</html>

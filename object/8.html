@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	"use strict";
+	// 使用代理控制对象
+	// let obj = {
+	// 	name: 1
+	// }
+	// let proxy = new Proxy(obj, {
+	// 	get(obj, property) {
+	// 		return obj[property]
+	// 	},
+	// 	set(obj,property,value){
+	// 		obj[property] = value
+	// 	}
+	// });
+	// obj.name = "uu";
+	// console.log(obj);
+	// console.log(proxy);
+
+	// 使用代理控制函数
+	// function jiecheng(num) {
+	// 	return num > 1 ? num * jiecheng(num - 1) : num;
+	// }
+	// let proxy = new Proxy(jiecheng, {
+	// 	apply(fun, obj, args) {
+	// 		return jiecheng.apply(obj, args);
+	// 	}
+	// })
+	// console.log(proxy.apply(this, [6]));
+	
+	// 使用代理控制数组
+	let user = [
+		{name:'ysl',age:18,sex:1},
+		{name:'zs',age:19,sex:0},
+		{name:'ls',age:20,sex:1},
+	]
+	let proxy = new Proxy(user,{
+		get(arr,index){
+			arr[index].name = arr[index].name.toUpperCase()
+			arr[index].sex = arr[index].sex ? "男" :"女";
+			return arr[index];
+		}
+	})
+	console.log(proxy[0]);
+</script>

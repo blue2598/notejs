@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+	</head>
+	<body>
+		<h1>使用Promise设置缓存</h1>
+		<p>当一个接口需要频繁获取信息相同的信息时，比如获取用户基本信息，可以使用缓存避免频繁调用后台接口</p>
+	</body>
+	<script src="js/ajax.js"></script>
+	<script>
+		// 语法
+		Promise.resolve().then(res => {
+			console.log("默认是fulfilled的状态");
+		})
+
+		function query(url, name) {
+			let cache = query.cache || (query.cache = new Map());
+			if (cache.has(name)) {
+				console.log("缓存");
+				return Promise.resolve(cache.get(name))
+			}
+			return Request(url).then(res => {
+				console.log("未缓存");
+				cache.set(name, res)
+			})
+		}
+		query("/productlist", "首页");
+		setTimeout(() => {
+			query("/productlist", "首页");
+		}, 1000)
+		setTimeout(() => {
+			query("/productlist", "首页");
+		}, 1000)
+		setTimeout(() => {
+			query("/productlist", "首页");
+		}, 1000);
+		console.dir(query);
+	</script>
+</html>

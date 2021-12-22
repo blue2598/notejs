@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+	</head>
+	<body>
+		<h3>class继承原理</h3>
+		<p>extends、super</p>
+		<p>super()必须写在使用this之前</p>
+	</body>
+	<script>
+		// funCreate();
+		classCreate();
+
+		function funCreate() {
+			function User(name) {
+				this.name = name;
+			}
+
+			function Admin(name) {
+				User.call(this, name)
+			}
+			Admin.prototype = Object.create(User.prototype);
+			console.dir(Admin);
+			let ysl = new Admin("ysl");
+			console.log(ysl);
+		}
+		// 以上是原理
+		function classCreate(){
+			class User{
+				constructor(name) {
+				    this.name = name;
+				}
+				show(){
+					return this.name
+				}
+			}
+			class Admin extends User{
+				constructor(name) {
+				    super(name)
+				}
+			}
+			console.dir(Admin);
+			let ysl = new Admin("ysl");
+			console.log(ysl);
+		}
+	</script>
+</html>

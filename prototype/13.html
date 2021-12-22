@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>继承</h2>
+		<p>create继承需要注意：</p>
+		<p>直接改变prototype之后需要再把constructor加上</p>
+		<p>将constructor属性设置成不可遍历，否则在forin循环时会遍历到</p>
+	</body>
+	<script>
+		function User() {}
+		function Admin() {}
+		
+		User.prototype.show = function() {
+			return "用户名"
+		}
+		User.prototype.showMember = function() {
+			return "普通用户会员"
+		}
+		// 使用Object.create实现继承时候需要把这里的代码移动到继承之后
+		// Admin.prototype.showMember = function() {
+		// 	return "后台管理员会员"
+		// }
+
+		// 方式一改变Admin.prototype.__proto__（Object.prototype）为User的prototype
+		// 但是说此种方式性能很差。。。。
+		// Admin.prototype.__proto__ = User.prototype;
+
+		// 方式二改变Admin.prototype为User的prototype但这是新创建一个对象使用User的prototype 不是赋值
+		// 但是这种方式会丢失constructor，需要再加上
+		Admin.prototype = new User(); //等于：Admin.prototype = Object.create(User.prototype)
+		// 这种直接给constructor的方式，constructor是可遍历的也就是enumerable属性为true
+		// Admin.prototype.constructor = Admin;
+		// 因此使用下面这种方法
+		Object.defineProperty(Admin.prototype, 'constructor', {
+			value: Admin,
+			enumerable: false
+		})
+		console.dir(Admin);
+		Admin.prototype.showMember = function() {
+			return "后台管理员会员"
+		}
+
+		let ysl = new User('ysl');
+		let yyy = new Admin("yyy");
+		// console.dir(yyy.show());
+
+		console.dir(yyy.showMember());
+		console.dir(yyy.show());
+	</script>
+</html>

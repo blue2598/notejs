@@ -1,0 +1,61 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-09-29 16:51:13
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-09-30 14:14:38
+ * @FilePath: \vue-js-point\2.html
+-->
+<!-- <script>
+	function add(){
+		let n=1;
+		function showAddn(){
+			console.log("n:"+ ++n)
+		}
+		showAddn();
+	}
+	add();
+	add();
+	add();
+	add();
+	function add2(){
+		let m = 1;
+		return function showAddm(){
+			console.log("m:"+ ++m)
+		}
+		showAddm()
+	}
+	let sum = add2();
+	sum();
+	sum();
+	sum();
+	sum();
+	let sum2 = add2();
+	sum2();
+	sum2();
+</script> -->
+<script>
+	let arr = [1, 2, 4, 2, 5, 3, 7, 8, 9, 10];
+	function between(a, b) {
+		return (v) => { return v >= a && v <= b; }
+	}
+	let goods = [
+		{ name: "沐浴露", price: 200, sells: 210 },
+		{ name: "口红", price: 218, sells: 206 },
+		{ name: "洗发水", price: 187, sells: 240 },
+		{ name: "肥皂", price: 45, sells: 106 },
+		{ name: "毛巾", price: 120, sells: 249 },
+		{ name: "香水", price: 2000, sells: 890 }
+	]
+	// let result = goods.sort((a, b) => {
+	// 	return b.price - a.price
+	// })
+	function sortByName(name) {
+		return function (a, b) {
+			return a[name] - b[name]
+		}
+	}
+	console.table(goods.sort(sortByName('sells')))
+	console.table(goods.sort(sortByName('price')))
+</script>

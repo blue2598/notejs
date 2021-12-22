@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		
+	</style>
+	<body>
+		<button class="prev">上一节</button>
+		<button class="next">下一节</button>
+		<div id="app">
+			<h1>watch</h1>
+			<p>{{sex}}</p>
+			<button @click="changeSex">切换</button>
+			<p>number里面的a:{{number.a}}</p>
+			<button @click="number.a++">number里面的a++</button>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+	<script src="./change.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let vm = new Vue({
+				data() {
+					return {
+						isFemale:true,
+						number:{
+							a:1,b:1,
+						}
+					}
+				},
+				computed:{
+					sex(){
+						return this.isFemale ? "女" :"男"
+					}
+				},
+				watch: {
+					isFemale:{
+						handler:function(newV,oldV){
+							console.log(newV,oldV);
+						}
+					},
+					sex:{
+						// 计算属性仍然可以监视到
+						handler:function(newV,oldV){
+							console.log("监听计算属性："+newV,oldV);
+						}
+					},
+					"number.a":{
+						// 监听属性里面的属性
+						handler:function(newV,oldV){
+							console.log("监听number里面的a："+newV,oldV);
+						}
+					},
+					
+				},
+				methods:{
+					changeSex(){
+						this.isFemale = !this.isFemale;
+					}
+				}
+			});
+			vm.$mount("#app");
+		</script>
+	</body>
+</html>

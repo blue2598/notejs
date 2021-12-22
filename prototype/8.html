@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>a instanceof b：判断实例对象和构造函数之间的关系</h2>
+		<p>检测a的原型链上是否存在b(构造函数)的prototype</p>
+		<h2>b.isPrototypeOf(a):判断a对象的原型链中是否有b(对象)</h2>
+	</body>
+	<script>
+		function A() {}
+		function B(){}
+		let b =new B();
+		A.prototype = b;
+		let a = new A();
+		console.log(a);
+		console.log(B.prototype);
+		console.log(a instanceof B);
+		console.log(a instanceof A);
+		console.log(b.isPrototypeOf(a));
+	</script>
+</html>

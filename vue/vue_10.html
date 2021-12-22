@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+
+	</style>
+	<body>
+		<button class="prev">上一节</button>
+		<button class="next">下一节</button>
+		<div id="app">
+			<h1>vue监测数组中数据改变的原理：包装</h1>
+			<!-- 只有调用了push、pop、unshift、shift、sort、reverse、splice时vue才响应数组变化 -->
+			<!-- 以上这些方法被包装了  不是Array.prototype上面的push -->
+			<button @click="changeIndex0">修改第0项-Vue.set()</button>
+			<button @click="changeIndex0m1">修改第0项-splice</button>
+			<ul>
+				<li v-for="(item,index) in dataArr" :key="item.id">{{item.name}}-{{item.sex}}</li>
+			</ul>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+	<script src="./change.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let vm = new Vue({
+				data() {
+					return {
+						dataArr: [{
+							id: 1,
+							name: "ysl",
+							sex: "女"
+						}, {
+							id: 2,
+							name: "yyy",
+							sex: "女"
+						}, {
+							id: 3,
+							name: "lsy",
+							sex: "男"
+						}],
+						filterDataByWatch: [],
+					}
+				},
+				methods:{
+					changeIndex0(){
+						// 这样不可以
+						// this.dataArr[0] = {
+						// 	id: "001",
+						// 	name: "s",
+						// 	sex: "nan"
+						// }
+						Vue.set(this.dataArr,0,{id:"001",name:"s",sex:Math.random()})
+						// 或者
+					},
+					changeIndex0m1(){
+						this.dataArr.splice(0,1,{id:"001",name:"s",sex:Math.random()})
+					}
+				}
+			});
+			vm.$mount("#app");
+		</script>
+		<script>
+		let data = {name:"杨双林",sex:"女"};
+		// 构造函数，监视data变化
+		function Observer(obj){
+			let keys = Object.keys(obj);
+			keys.forEach(k=>{
+				Object.defineProperty(this,k,{
+					get(){
+						return obj[k]
+					},
+					set(value){
+						obj[k] = value;
+						console.log("data里面的"+k+"被改变了,重新解析模板");
+					}
+				})
+			})
+		}
+		let obs = new Observer(data);
+		// 创建一个vm实例
+		let vmSelf = {};
+		vmSelf._data = data = obs;
+		console.log(vmSelf);
+		
+		</script>
+	</body>
+</html>

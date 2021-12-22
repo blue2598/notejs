@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>Dom结点借用方法</h2>
+		<p>dom结点是类数组  无法使用数组的filter放法但是可以借用</p>
+		<button class="filter">保留这个</button>
+		<button>不要</button>
+	</body>
+	<script>
+		let arr = [1,2,3,4,5];
+		let newarr = arr.filter(item=>item>3);
+		console.log(newarr);
+		
+		// dom结点是类数组  无法使用数组的filter放法但是可以借用
+		let btns = document.querySelectorAll('button');
+		console.log(btns);
+		
+		// 查看filter方法位于对象的什么原型链上
+		let btnsRes = Array.prototype.filter.call(btns,item=>{
+			return item.hasAttribute('class')
+		});
+		console.log(btnsRes);
+	</script>
+</html>

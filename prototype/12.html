@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>合理的构造函数方法声明</h2>
+		<p>创建构造函数时将方法放在该构造函数的原型链中而不是函数体内</p>
+	</body>
+	<script>
+		function User(name){
+			this.name = name;
+			this.show = function(){
+				return this.name
+			}
+		}
+		let ysl = new User('ysl');
+		let yyy = new User('yyy');
+		console.log(ysl,yyy);//可以看到每次实例化的对象都有个show函数，这样加大了内存损耗
+		// 用一下方法：
+		User.prototype.showName = function(){
+			return this.name
+		}
+		console.log(ysl.showName());
+		console.log(yyy.showName());
+		
+		
+	</script>
+</html>

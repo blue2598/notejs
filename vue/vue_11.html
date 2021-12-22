@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+
+	</style>
+	<body>
+		<button class="prev">上一节</button>
+		<button class="next">下一节</button>
+		<div id="app">
+			<h1>vue自定义指令</h1>
+			<p>函数式写法何时被调用</p>
+			<ol>
+				<li>指令与元素成功绑定时</li>
+				<li>指令所在的模板被重新解析时</li>
+			</ol>
+			<p>使用自定义指令v-big放大十倍</p>
+			<p>对象式写法何时被调用</p>
+			<ol>
+				<li>bind()指令与元素成功绑定时</li>
+				<li>inserted()元素插入到页面时</li>
+				<li>update()指令所在的模板被重新解析时</li>
+			</ol>
+			<span>当前的n值是:{{n}}</span><br></ hr>
+			放大十倍后：<span v-big="n">{{n}}</span>
+			<button @click="n++">n++</button>
+			<p>使用自定义指令v-ibind使得input框获取焦点</p>
+			<input type="text" v-ibind v-model="n">
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+	<script src="./change.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// 		全局
+			// Vue.directive("指令名", "对象/函数")
+			let vm = new Vue({
+				data() {
+					return {
+						n: 12,
+						m: 13,
+					}
+				},
+				directives: {
+					// 简写，函数写法
+					big(elem, binding) {
+						elem.innerHTML = binding.value * 10;
+					},
+					ibind: {
+						bind() {
+							console.log("bind");
+						},
+						inserted(elem) {
+							console.log("inserted");
+							elem.focus();
+						},
+						update(elem) {
+							elem.focus();
+							console.log("update");
+						}
+					}
+				},
+				methods: {
+
+
+				}
+			});
+			console.dir(vm);
+			vm.$mount("#app");
+		</script>
+
+	</body>
+</html>

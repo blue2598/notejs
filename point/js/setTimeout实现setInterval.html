@@ -1,0 +1,36 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-10 15:01:17
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-10 15:11:55
+ * @FilePath: \notejs\point\js\setTimeout实现setInterval.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function myInterval(callback, duration) {
+            function interval() {
+                callback();
+                setTimeout(interval, duration);
+            }
+            setTimeout(interval, duration)
+        }
+        function show() {
+            console.log(1);
+        }
+        myInterval(show, 1000)
+    </script>
+</body>
+
+</html>

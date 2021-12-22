@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script>
+	"use strict";
+	const DATA = Symbol();
+	// const user = {
+	// 	[DATA]:{
+	// 		name:"ysl",age:18
+	// 	},
+	// 	set age(value){
+	// 		if(value>100 || value<0){
+	// 			throw Error("age is not validate")
+	// 		}else{
+	// 			this[DATA].age=value
+	// 		}
+	// 	},
+	// 	get age(){
+	// 		return this[DATA].age
+	// 	}
+
+	// }
+	// user.age=87;
+	// console.log(user)
+
+	// 构造函数使用访问器
+	// function User(name, age) {
+	// 	let data = {name,age};
+	// 	Object.defineProperties(this, {
+	// 		name: {
+	// 			set(value) {
+	// 				data.name = "hhh";
+	// 			},
+	// 			get(){
+	// 				return data.name
+	// 			}
+	// 		},
+	// 		age: {
+	// 			set(value) {
+	// 				data.age = value;
+	// 			},
+	// 			get(){
+	// 				return data.age
+	// 			}
+	// 		}
+	// 	})
+	// }
+	// let ysl = new User();
+	// ysl.name = "uu"
+	// console.log(ysl.name);
+	// 类：可以理解为构造函数的语法糖
+	class User{
+		constructor(name,age) {
+		    this[DATA] = {name,age}
+		}
+		set name(value){
+			this[DATA].name = "34";
+		}
+		get name(){
+			return this[DATA].name;
+		}
+	}
+	let ysl = new User();
+	ysl.name = "9";
+	console.log(ysl.name);
+</script>

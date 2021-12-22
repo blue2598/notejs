@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<style>
+	* {
+		margin: 10px;
+	}
+
+	.box {
+		padding: 10px;
+		background-color: aquamarine;
+	}
+</style>
+
+<body>
+	<button class="prev">上一节</button>
+	<button class="next">下一节</button>
+	<div id="app">
+		<a @click.prevent="showMsg" href="http://www.baidu.com">
+			阻止默认事件
+		</a>
+		<!-- 先捕获再冒泡出去 -->
+		<div @click="showNum">
+			<div class="box" @click="showbox">
+				<button @click.stop="showStop">阻止冒泡</button>
+			</div>
+		</div>
+		<button @click.once="showOnce">只触发一次</button>
+
+		<div class="box" @click.capture="showbox">
+			<button @click="showStop">捕获模式</button>
+		</div>
+		<p>self和stop的区别</p>
+		<div @click="showNum">
+			<div class="box" @click.self="showbox">
+				<button @click="showStop">self</button>
+			</div>
+		</div>
+		<div class="box" @scroll.passive="scrollLi" style="height: 300px;overflow: auto;">
+			<div style="height: 100px;background-color: aquamarine;">1</div>
+			<div style="height: 100px;background-color: aquamarine;">2</div>
+			<div style="height: 100px;background-color: aquamarine;">3</div>
+			<div style="height: 100px;background-color: aquamarine;">4</div>
+			<div style="height: 100px;background-color: aquamarine;">5</div>
+		</div>
+
+		<input @keyup.ctrl.c="showNum" placeholder="按下ctrl和c" v-model="inputName" />
+		<p>{{fullName}}</p>
+		<p>{{fullName}}</p>
+		<p>{{fullName}}</p>
+		<p>{{fullName}}</p>
+		<p>{{fullName}}</p>
+		<!-- template只能和v-if配合 不能和v-show -->
+		<template v-if="1===3">
+			<p>1</p>
+			<p>2</p>
+			<p>3</p>
+		</template>
+	</div>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+	<script src="./change.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		let vm = new Vue({
+			data() {
+				return {
+					name: "data name",
+					inputName: ""
+				}
+			},
+			computed: {
+				// fullName: {
+				// 	get() {
+				// 		// 第一次会缓存起来只调用一次
+				// 		// 数据改变时会再调用
+				// 		// 这里的this指向vm
+				// 		console.log("缓存");
+				// 		return this.inputName + "123"
+				// 	}
+				// },
+				// 或者这样写=>只读不改的时候可以这样简写
+				fullName() {
+					console.log("缓存");
+					return this.inputName + "123"
+				},
+			},
+			methods: {
+				showMsg() {
+					alert("显示")
+				},
+				showbox() {
+					alert("1")
+				},
+				showStop() {
+					alert("2")
+				},
+				showOnce() {
+					alert("触发一次")
+				},
+				scrollLi() {
+					for (let i = 0; i < 100000; i++) {
+						console.log(i);
+					}
+				},
+				showNum() {
+					alert(event.keyCode)
+				}
+			}
+		});
+		vm.$mount("#app");
+	</script>
+</body>
+
+</html>

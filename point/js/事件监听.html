@@ -1,0 +1,50 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-13 10:49:41
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-14 17:10:43
+ * @FilePath: \notejs\point\js\事件监听.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div {
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+        }
+
+        .btn {
+            background-color: skyblue;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="div">
+        <button class="btn">点击</button>
+    </div>
+</body>
+<script>
+    // element.addEventListener(event, function, useCapture)
+    // useCapture：在捕获阶段执行，还是冒泡阶段
+    let div = document.querySelector(".div");
+    let btn = document.querySelector(".btn");
+    div.addEventListener('click', function () {
+        console.log("div点击事件");
+    }, false)//false：默认,先冒泡，再捕获；true:先捕获，再冒泡
+    btn.addEventListener('click', function () {
+        console.log("btn点击事件");
+    }, false)
+</script>
+
+</html>

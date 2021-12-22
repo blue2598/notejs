@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>原型工厂批量继承</h2>
+	</body>
+	<script>
+		User.prototype.show = function(){
+			return "父亲的方法"
+		}
+		function inheritFactories(child,parent){
+			child.prototype = Object.create(parent.prototype);
+			Object.defineProperty(child.prototype,"constructor",{
+				value:child,
+				enumerable:false,
+			})
+		}
+		function User(){}
+		function Member(){}
+		inheritFactories(Member,User);
+		let ysl =new Member()
+		console.dir(ysl.show());
+	</script>
+</html>

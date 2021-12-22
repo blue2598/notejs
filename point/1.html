@@ -1,0 +1,55 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-10 14:29:59
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-14 15:22:36
+ * @FilePath: \notejs\point\1.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let arr = [NaN, NaN, null, null, undefined, undefined, 1, 1, 2, 2, { name: 1 }, { name: 1 }];
+        function uniqueByIndexOf(arr) {
+            let result = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (result.indexOf(arr[i]) < 0) {
+                    result.push(arr[i])
+                }
+            }
+            return result
+        }
+
+        function uniqueByIncludes(arr) {
+            let result = [];
+            for (let i = 0; i < arr.length; i++) {
+                if (!result.includes(arr[i])) {
+                    result.push(arr[i])
+                }
+            }
+            return result
+        }
+        function uniqueByFilter(arr) {
+            return arr.filter((item, index) => arr.indexOf(item) === index)
+        }
+        function uniqueBySet(arr) {
+            return [...new Set(arr)]  // Array.from(new Set(arr))
+        }
+        console.log(uniqueByIndexOf(arr));
+        console.log(uniqueByIncludes(arr));
+        console.log(uniqueByFilter(arr));
+        console.log(uniqueBySet(arr));
+    </script>
+</body>
+
+</html>

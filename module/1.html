@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h3>import需要搭建本地服务器使用,直接文件管理器中双击文件不可运行</h3>
+	</body>
+	<script>
+		"use strict"
+		// AMD require.js
+		// CMD sea.js
+		let module = (function() {
+			const moduleList = {};
+			/**
+			 * 参数说明
+			 * @param {string} name
+			 * @description 模块名称
+			 * @param {array} modules
+			 * @description 依赖的其他模块
+			 * @param {function} action
+			 * @description 模块提供的功能
+			 */
+
+			function define(name, modules, action) {
+				modules.map((item, index) => modules[index] = moduleList[item]);
+				console.log(modules);
+				moduleList[name] = action.apply(null, modules);
+			}
+			return {
+				define
+			}
+		})()
+
+		module.define('data', [], function() {
+			return {
+				first() {
+					return 1
+				}
+			}
+		})
+		module.define('arrTool', [], function() {
+			return {
+				max(arr, key) {
+					let result = arr.slice(0);
+					return result.sort((a, b) => b[key] - a[key])[0];
+				}
+			}
+		})
+		module.define('lesson', ['arrTool', 'data'], function(...tool) {
+			let data = [{
+				name: "js",
+				price: 123
+			}, {
+				name: "php",
+				price: 24321
+			}];
+			console.log(tool[0].max(data, 'price'));
+		})
+	</script>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  </body>
+  <script>
+    // "use strict";
+    let arr = [{
+      name: 'ysl',
+      id: 1
+    }, {
+      name: 'sfa',
+      id: 2
+    }, {
+      name: 'gsd',
+      id: 4
+    }, {
+      name: 'gag',
+      id: 5
+    }];
+    let newObj = arr.reduce((obj, cur, arr) => {
+      obj["姓名：" + cur["name"]] = cur;
+      return obj
+    }, {})
+    // console.log(JSON.stringify(newObj,null,2));
+    // console.log(Object.assign({
+    //   name: 1
+    // }, {
+    //   age: 2
+    // }))
+
+    // let obj1 = {
+    //   name: 1,
+    //   age: 1
+    // };
+    // let obj2 = {
+    //   name: 2,
+    //   color: "red"
+    // };
+    // console.log( {...obj1,...obj2} );
+    // console.log(Object.assign(obj1,obj2));
+
+    // function setConfig(params){
+    //   // 默认配置
+    //   let option = {port:1024,url:"http://www.baidu.com",name:"百度"};
+    //   // 用户设置
+    //   const config = {...option,...params};
+    //   return config
+    // }
+    // console.log( (setConfig({port:988})) )
+
+    // let obj = {name:1,color:"red"};
+    // let newobj = obj;
+    // console.log(newobj);
+    // newobj.name = "us";
+    // console.log(newobj,obj);
+    let obj = {
+      name: 1,
+      lesson: [1, 2, 3, 4],
+      click: 90
+    };
+    let newo = Object.assign({}, obj)
+    newo.lesson.push(8);
+    console.log(newo)
+    console.log(obj)
+    let user_1 = {
+      name: 1 + 1
+    }
+    console.log(Object.assign({}, user_1))
+    let objysl = {
+      a: {
+        b: {
+          c: "1"
+        }
+      }
+    }
+  </script>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+	</head>
+	<body>
+		<h3>保护属性</h3>
+		<p>使用命名规则保护属性 _name:只是人为约定该属性不要随意修改，开发者可在类内部使用setter进行判断</p>
+		<p>使用Symbol()</p>
+		<p>使用WeakMap()</p>
+	</body>
+	<script>
+		// nameSpace();
+		// useSymbol();
+		useWeakMap();
+
+		// 使用命名规则
+		function nameSpace() {
+			class Host {
+				static name = "static";
+				_url = "https://www.baidu.com";
+				set url(value) {
+					if (!/^https?:/i.test(value)) {
+						throw new Error("非法域名！")
+					}
+					this._url = value;
+				}
+			}
+			let host = new Host();
+			console.dir(host);
+			host.url = "https://fsaf"
+			console.dir(host);
+			// host._url = "3423";
+			// console.dir(host);
+		}
+
+		function useSymbol() {
+			let HostS = Symbol("url");
+			class Host {
+				// 如果需要保存多个值可以使用
+				// this.[HostS] = {};
+				// this.[HostS].host = "https://www.baidu.com"
+				[HostS] = "https://www.baidu.com";
+				set url(value) {
+					if (!/^https?:/i.test(value)) {
+						throw new Error("非法域名！")
+					}
+					this[HostS] = value;
+				}
+				get url() {
+					return this[HostS]
+				}
+			}
+			let host = new Host();
+			console.dir(host[HostS]);
+			console.dir(host);
+			host.url = "https://24234"
+			console.dir(host)
+		}
+
+		function useWeakMap() {
+			// WeakMap 存储键值形式 键名只能是对象
+			let HostS = new WeakMap();
+			class Host {
+				constructor(name) {
+				    this.name = name;
+					HostS.set(this,"https://www.baidu.com")
+				}
+				set url(value) {
+					if (!/^https?:/i.test(value)) {
+						throw new Error("非法域名！")
+					}
+					HostS.set(this,value)
+				}
+				get url() {
+					return HostS.get(this)
+				}
+			}
+			let host = new Host("电脑");
+			console.dir(host);
+			host.url = "24234"
+			console.dir(host)
+		}
+	</script>
+</html>

@@ -1,0 +1,66 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-10 13:54:44
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-10 14:42:32
+ * @FilePath: \notejs\point\js\继承.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 构造函数的继承**************************************************************** */
+        function Eat() { }
+        Eat.prototype.showFood = function (food) {
+            console.log("eat" + food);
+        }
+        function User(name) {
+            this.name = name;
+        }
+        console.dir(User);
+        console.log(User.__proto__ == Function.prototype);
+        console.log(User.prototype.__proto__ == Object.prototype);
+        console.log(Function.prototype.__proto__ == Object.prototype);
+        /* *************继承******** */
+        User.prototype = Object.create(Eat.prototype);
+        Object.defineProperty(User.prototype, 'constructor', {
+            value: User,
+            enumerable: false,
+        })
+        /* *************继承******** */
+        console.log(User.prototype.__proto__ == Eat.prototype);
+        let ysl = new User("ysl");
+        ysl.showFood("草莓");
+        /* 类的继承:类就是原型链的语法糖*************************************************************************** */
+        class Address {
+            constructor(address) {
+                this.address = address;
+            }
+            show() {
+                return this.address;
+            }
+        }
+        class Member extends Address {
+            constructor(name, address) {
+                super(address);
+                this.name = name;
+            }
+
+        }
+        let huiyuan = new Member("ysl", "安徽省合肥市");
+        console.log(huiyuan);
+        console.dir(huiyuan.show());
+    </script>
+</body>
+
+</html>

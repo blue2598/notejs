@@ -1,0 +1,73 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-10 13:19:36
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-10 13:45:28
+ * @FilePath: \notejs\point\js\数据劫持以及双向绑定.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let obj = {
+            name: 1,
+            a: {
+                b: 1,
+                c: {
+                    d: 2
+                }
+            }
+        }
+        /* *******************defineProperty实现*********************** */
+        let data = {};
+        for (let key in obj) {
+            Object.defineProperty(data, key, {
+                get() {
+                    console.log("有人读取了", obj, key);
+                    return obj[key]
+                },
+                set(value) {
+                    console.log("有人设置了属性");
+                    obj[key] = value;
+                }
+            })
+        }
+        obj = data;
+
+        /* *******************Proxy实现*********************** */
+        let obj2 = {
+            name: 1,
+            a: {
+                b: 1,
+                c: {
+                    d: 2
+                }
+            }
+        }
+        let _data = {};
+        _data = new Proxy(obj2, {
+            get(target, k) {
+                console.log("查");
+                return target[k]
+            },
+            set(target, k, value) {
+                console.log("改");
+                target[k] = value;
+            },
+        })
+
+        console.log(_data);
+    </script>
+</body>
+
+</html>

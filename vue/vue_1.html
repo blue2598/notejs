@@ -1,0 +1,84 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-11-15 10:53:11
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-17 14:40:03
+ * @FilePath: \notejs\vue\vue_1.html
+-->
+<!DOCTYPE html>
+<html>
+·
+
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+
+<body>
+	<button class="next">下一节</button>
+	<div id="app">
+		<p>{{msg.toLocaleUpperCase()}}</p>
+		<p>{{show()}}</p>
+	</div>
+	<div id="root">
+		<h3>{{hello}}</h3>
+	</div>
+</body>
+<script src="./change.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script type="text/javascript">
+	console.log(Vue);
+	Vue.config.productionTip = false;
+	let vm = new Vue({
+		el: "#app",
+		data() {
+			console.log(this);
+			return {
+				msg: "hello msg"
+			}
+		},
+		methods: {
+			show() {
+				return "显示"
+			}
+		}
+	});
+	// console.log(vm);
+	let root = new Vue({
+		el: "#root",
+		data: {
+			hello: "你好"
+		},
+	});
+	// console.log(a);
+	let a = 10;
+	{
+		var b = 10;
+	}
+	// document.cookie = "name=1";
+	console.log(b);
+	console.log(document.cookie);
+
+	function throttle(fn, duration) {
+		let previous = 0;
+		return function () {
+			let now = new Date();
+			if (now - previous > duration) {
+				fn.call()
+			}
+		}
+	}
+	function debounce(fn, delay) {
+		let timer;
+		return function () {
+			clearTimeout(timer)
+			timer = setTimeout(() => {
+				fn();
+			}, delay)
+		}
+	}
+</script>
+
+</html>

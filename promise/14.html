@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>Promise.race()</h1>
+	</body>
+	<script src="js/ajax.js"></script>
+	<script>
+		let request1 = new Promise((resolve, reject) => {
+			setTimeout(() => {
+				resolve("1的返回")
+			})
+		})
+		let request2 = new Promise((resolve, reject) => {
+			resolve("2的返回")
+		})
+		Promise.race([request1, request2]).then(result => {
+				// 谁先返回取谁的值
+				console.log(result);
+			})
+			.catch(err => {
+				console.log(err);
+			})
+	</script>
+</html>

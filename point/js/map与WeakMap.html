@@ -1,0 +1,64 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-13 10:59:38
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-13 11:53:51
+ * @FilePath: \notejs\point\js\map.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        {
+            console.log("***************************map*********************************************");
+            let arr = [{ name: "arr" }]
+            let map = new Map([[{ name: "对象作为键名" }, "对象的键值"], [arr, "数组的键值"]]);
+            map.set({ function() { return 2 } }, "方程的键值").set(1, "数字的键值1");
+            arr = null;
+            console.log(map);
+            console.log(map.size);
+            console.log(map.keys());
+            for (let [key, value] of map.entries()) {
+                console.log(value);
+            }
+            for (let [key, value] of map) {
+                console.log(key);
+            }
+            map.forEach((key, value) => {
+                console.log("foreach遍历", value);
+            })
+            console.log(map.has(1));
+            console.log(map.get(1));
+            console.log(map.has(arr));
+            console.log(map.delete(1));
+            map.clear();
+        }
+        {
+            console.log("***************************WeakMap*********************************************");
+            let arr = [{ name: "arr" }]
+            let weakM = new WeakMap([[arr, "外部数组的键值"]]);
+            weakM.set({}, {})
+            console.log(weakM);
+            console.log(weakM.has(arr));
+            console.log(weakM.get(arr));
+            arr = null;
+            console.log(weakM.has(arr));
+            console.log(weakM);
+            console.log(weakM.size);
+            console.log(weakM);
+        }
+
+    </script>
+</body>
+
+</html>

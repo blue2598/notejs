@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>__proto__与prototype</h2>
+		<p>prototype是为实例化的对象提供的原型</p>
+	</body>
+	<script>
+		// console.log()和console.dir()的区别
+		// function show(){
+		// 	return "我是谁"
+		// }
+		// console.log(show);
+		// console.dir(show);
+		
+		
+		function User(name){
+			this.name = name;
+		}
+		let ysl = new User("ysl");
+		Object.prototype.show = function(){
+			return "给Object的prototype加show方法"
+		}
+		User.prototype.showName = function(){
+			return "给User的prototype加showName方法"
+		}
+		console.dir(User);
+		console.dir(ysl);
+		console.dir(Object);
+		console.log(Object.prototype == Object.__proto__)
+		
+		console.log(User.prototype == ysl.__proto__);
+		console.log(User.prototype.__proto__ == Object.prototype);
+		console.log(User.__proto__.__proto__ == Object.prototype);
+		console.log(User.prototype == ysl.__proto__);
+		console.log(ysl.__proto__.__proto__ == Object.prototype);
+		// console.log(y.showName());
+		
+		let obj = {};
+		console.dir(obj);
+		console.log(obj.__proto__ == Object.prototype);
+	</script>
+</html>

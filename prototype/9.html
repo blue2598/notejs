@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>in和hasOwnProperty属性检测</h2>
+		<p>in 和 hasOwnProperty的区别是 hasOwnPropert只检测对象本身是否有该属性。in还判断该属性是不是存在该对象的原型链上</p>
+	</body>
+	<script>
+		let a = {name:"a"};
+		let b = {age:"b"};
+		console.log("name" in a);
+		console.log(a.hasOwnProperty("name"));
+		Object.setPrototypeOf(a,b);
+		console.log("age" in a);
+		console.log(a.hasOwnProperty("age"));
+		
+		// 这里设置了a的原型是b对象，此时遍历会得到两个key
+		for (let key in a) {
+			console.log(key);
+		}
+	</script>
+</html>

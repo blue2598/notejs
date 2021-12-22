@@ -1,0 +1,106 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-09 15:53:38
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-09 16:23:40
+ * @FilePath: \notejs\point\双飞翼布局.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .parent {
+        /*以下非必须 */
+        overflow: hidden;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .div-content {
+        width: calc(100% - 400px);
+        float: left;
+        background-color: #999;
+        margin: 0 200px;
+    }
+
+    .div-left {
+        width: 200px;
+        margin-left: -100%;
+        float: left;
+        background-color: orange;
+    }
+
+    .div-right {
+        width: 200px;
+        margin-left: -200px;
+        float: left;
+        background-color: skyblue;
+    }
+
+    .flex {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .flex-content {
+        background-color: #999;
+        width: 100%;
+        order: 1;
+    }
+
+    .flex-left {
+        background-color: orange;
+        width: 200px;
+        order: 0;
+        flex-shrink: 0;
+    }
+
+    .flex-right {
+        background-color: skyblue;
+        width: 200px;
+        flex-shrink: 0;
+        order: 2;
+    }
+</style>
+
+<body>
+    <h3>float布局实现</h3>
+    <div class="parent">
+        <div class="div-content">
+            <ul>
+                <li>中间宽度自适应,两边宽度固定</li>
+                <li>中间栏在浏览器中优先展现渲染</li>
+                <li>每一列都可以是最高列</li>
+            </ul>
+        </div>
+        <div class="div-left">
+            我是左边
+        </div>
+        <div class="div-right">我是右边</div>
+    </div>
+    <h3>flex布局实现</h3>
+    <div class="parent flex">
+        <div class="flex-content">
+            <ul>
+                <li>中间宽度自适应,两边宽度固定</li>
+                <li>中间栏在浏览器中优先展现渲染</li>
+                <li>每一列都可以是最高列</li>
+            </ul>
+        </div>
+        <div class="flex-left">
+            我是左边
+        </div>
+        <div class="flex-right">我是右边</div>
+    </div>
+</body>
+
+</html>

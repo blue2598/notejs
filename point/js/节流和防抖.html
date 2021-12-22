@@ -1,0 +1,68 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-13 14:08:37
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-14 10:58:56
+ * @FilePath: \notejs\point\js\节流和防抖.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>防抖：在一定时间内，无论触发了多少次函数，只在最后一次执行</p>
+    <button id="btn1">正常</button>
+    <button id="btn2">节流</button>
+    <input type="text" name="keyword" value="防抖">
+    <script>
+        function throttle(fn, delay) {
+            let previous = 0;
+            return function () {
+                const args = arguments;
+                const _this = this;
+                let now = new Date();
+                if (now - previous > delay) {
+                    fn.apply(_this, args);
+                    previous = now;
+                }
+            }
+        }
+        let timer;
+        function debounce(fn, delay) {
+            let timer;
+            return function () {
+                const _this = this;
+                const args = arguments;
+                if (timer) clearTimeout(timer);
+                timer = setTimeout(() => {
+                    fn.apply(_this, args); // _this.fn(args);
+                }, delay)
+            }
+        }
+        let button1 = document.querySelector('#btn1');
+        let button2 = document.querySelector('#btn2');
+        function clickFn(event) {
+            console.log(event);
+            console.log("点击了");
+        }
+        button1.addEventListener('click', clickFn);
+        button2.addEventListener('click', throttle(clickFn, 1000));
+
+        /* *************************防抖******************************* */
+        let input = document.querySelector('input[name="keyword"]');
+        function showValue(event) {
+            console.log(event);
+        }
+        input.addEventListener('input', debounce(showValue, 1000))
+    </script>
+</body>
+
+</html>

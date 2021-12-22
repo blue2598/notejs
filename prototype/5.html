@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h3>自定义对象的原型设置</h3>
+	</body>
+	<script>
+		let obj = {
+			name:"obj"
+		};
+		let parentProto = {
+			name:"parent",
+			age: 18,
+			show(){
+				return this.name
+			}
+		}
+		Object.setPrototypeOf(obj,parentProto);
+		console.log(obj);
+		console.log(obj.name);
+		console.log(obj.age);
+		console.log(obj.show());
+		console.log(parentProto.show());
+	</script>
+</html>

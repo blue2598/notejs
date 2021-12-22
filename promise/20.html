@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h3>await的并行执行技巧</h3>
+	</body>
+	<script src="js/ajax.js"></script>
+	<script>
+		 function p1(){
+			return new Promise(resolve=>{
+				setTimeout(()=>{
+					resolve(1)
+				},1000)
+			})
+		}
+		 function p2(){
+			return new Promise(resolve=>{
+				setTimeout(()=>{
+					resolve(2)
+				},1000)
+			})
+		}
+		
+		// 这里的p2会等p1结束之后才会执行
+		// async function show(){
+		// 	let p1v = await p1();
+		// 	console.log(p1v);
+		// 	let p2v = await p2();
+		// 	console.log(p2v);
+		// }
+		// 如果想要p1 p2同时执行
+		// 这是原理实际中推荐promise.all
+		
+		// async function show(){
+		// 	let p1v =  p1();
+		// 	let p2v =  p2();
+		// 	let p1Res = await p1v;
+		// 	let p2Res = await p2v;
+		// 	console.log(p1Res);
+		// 	console.log(p1Res);
+		// }
+		
+		// Promise.all
+		async function show(){
+			let result = await Promise.all([p1(),p2()]);
+			console.log(result);
+		}
+		show();
+	</script>
+</html>

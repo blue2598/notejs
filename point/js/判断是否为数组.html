@@ -1,0 +1,43 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-14 16:19:51
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-14 16:52:26
+ * @FilePath: \notejs\point\js\判断是否为数组.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p></p>
+    <p></p>
+    <p></p>
+    <p></p>
+    <script>
+        let arr = [1, 2, 3];
+        console.log(Object.prototype.toString.call(arr));
+        console.log([] instanceof Array);
+        console.log(Array.isArray(0));
+
+
+        class Show {
+            print(...elem) {
+                console.log(elem);
+            }
+        }
+        let s = new Show(document.querySelector('p'));
+        let ps = document.querySelectorAll('p');
+        s.print.apply(this, ps)
+    </script>
+</body>
+
+</html>

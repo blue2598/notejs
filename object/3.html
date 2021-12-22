@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+
+	</body>
+  <script>
+  "use strict";
+    function createElem(option={}){
+      let {width=200,height=200,backgroundColor="#107357",color="#ffffff"} = option;
+      let elem = document.createElement("div");
+      elem.style.width = width+"px";
+      elem.style.height = height+"px";
+      elem.style.backgroundColor = backgroundColor;
+      document.body.appendChild(elem)
+    }
+    createElem({width:400,height:100,backgroundColor:"#ffff00"})
+    createElem();
+    let user = {name:"ysl",age:18};
+    console.log(user.hasOwnProperty("name"));
+    let arr = [1,2,34];
+    console.log(arr.hasOwnProperty("length"));
+    console.log(arr.hasOwnProperty("concat")); /
+    console.log("concat" in arr);
+  </script>
+</html>

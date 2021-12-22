@@ -1,0 +1,82 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-10 09:58:55
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-10 10:18:01
+ * @FilePath: \notejs\point\1px处理.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var viewport = document.querySelector("meta[name=viewport]");
+        //下面是根据设备像素设置viewport
+        if (window.devicePixelRatio == 1) {
+            viewport.setAttribute('content', 'width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no');
+        }
+        if (window.devicePixelRatio == 2) {
+            viewport.setAttribute('content', 'width=device-width,initial-scale=0.5, maximum-scale=0.5, minimum-scale=0.5, user-scalable=no');
+        }
+        if (window.devicePixelRatio == 3) {
+            viewport.setAttribute('content', 'width=device-width,initial-scale=0.3333333333333333, maximum-scale=0.3333333333333333, minimum-scale=0.3333333333333333, user-scalable=no');
+        }
+        var docEl = document.documentElement;
+        var fontsize = 32 * (docEl.clientWidth / 750) + 'px';
+        docEl.style.fontSize = fontsize;
+    </script>
+    <style>
+        body {
+            padding: 10px;
+        }
+
+        .border {
+            width: 100%;
+            height: 100px;
+            margin: 10px 0;
+            margin-bottom: 20px;
+            /* background-color: #f4f4f4; */
+        }
+
+        .border0 {
+            border: 1px solid #000;
+        }
+
+        .border1 {
+            box-shadow: 0 -1px 0px 0px #000,
+                1px 0 0px 0px #000,
+                0 1px 0px 0px #000,
+                -1px 0 0px 0px #000;
+        }
+
+        .border2 {
+            position: relative;
+        }
+
+        .border2:after {
+            position: absolute;
+            content: '';
+            background: transparent;
+            display: block;
+            width: 100%;
+            height: 1px;
+            transform: scale(1, 0.5);
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="border border0">1px solid #000</div>
+    <div class="border border1">阴影</div>
+    <div class="border border2">transform</div>
+</body>
+
+</html>

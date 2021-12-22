@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+	</head>
+	<body>
+		<h3>继承内置类</h3>
+	</body>
+	<script>
+		useFunc();
+		useClass();
+		// 构造函数
+		function useFunc() {
+			function Arr(...args) {
+				args.forEach(item => this.push(item))
+				this.first = function() {
+					return this[0]
+				}
+				this.max = function() {
+					// 这里sort改变了原数组 不建议这样取最大值
+					return this.sort((a, b) => b - a)[0]
+				}
+			}
+			Arr.prototype = Object.create(Array.prototype);
+			let num = new Arr(1, 2, 412, 24323, 1231);
+			console.log(num);
+			console.dir(num.first());
+			console.dir(num.max());
+		}
+		// let arr = new Array(13,23);
+		// console.log(arr);
+		// 类
+		function useClass() {
+			class Arr extends Array {
+				constructor(...args) {
+					super(...args);
+				}
+			}
+			let num = new Arr(1, 243, 687, 341, 4234);
+			console.log(num);
+		}
+	</script>
+</html>

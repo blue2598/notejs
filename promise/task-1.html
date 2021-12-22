@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			.load{
+				height: 20px;
+				color: #fff;
+				background-color: #1ABC9C;
+				width: 0;
+				text-align: right;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>任务轮询</h3>
+		<div class="load"></div>
+	</body>
+	<script src="js/ajax.js"></script>
+	<script>
+		function show() {
+			let i = 0;
+			(function nowShow() {
+				if (i < 100) {
+					setTimeout(nowShow, 20);
+					console.log(++i)
+					document.querySelector(".load").innerHTML = i + "%";
+					document.querySelector(".load").style.width = i + "%";
+				}
+			})()
+		}
+		show()
+	</script>
+</html>

@@ -1,0 +1,69 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-01 16:20:13
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-01 17:15:45
+ * @FilePath: \notejs\axios\2.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>axios的基本使用</h1>
+    <ul id="jokeList"></ul>
+</body>
+
+<script>
+    // 这个service与axios对象的功能几乎相同
+    let service = axios.create({
+        baseURL: "https://api.apiopen.top",
+        timeout: 3000,
+    })
+
+    // 拦截器
+    // 请求拦截器
+    service.interceptors.request.use((config) => {
+        console.log("请求拦截器 成功回调");
+        console.log(config);
+        return config
+    }, (error) => {
+        console.log(error);
+        console.log("请求拦截器 失败回调");
+        return Promise.reject(error)
+    })
+    service.interceptors.response.use((response) => {
+        console.log("响应拦截器 成功回调");
+        return response
+    }, (error) => {
+        console.log(error);
+        console.log("响应拦截器 失败回调");
+        return Promise.reject(error);
+    })
+
+    service.get('/getJoke').then(res => {
+        let result = res.data.result;
+        let ul = document.getElementById("jokeList");
+        let li = '';
+        result.map(item => {
+            li += `<li>
+                    <p>${item.text}</p>
+                    <img src=${item.thumbnail}>
+                 </li>`
+        })
+        ul.innerHTML = li
+    }).catch(err => {
+        console.log(err);
+    })
+</script>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>Promise.all()</h1>
+		<h1>Promise.allSettled()</h1>
+	</body>
+	<script src="js/ajax.js"></script>
+	<script>
+		let request1 = Request("/13.html");
+		let request2 = new Promise((resolve, reject) => {
+			// resolve("成功2")
+			reject("失败2")
+		})
+		Promise.all([request1, request2]).then(result => {
+				// 单个的promise处理了异常，那么如果有错误，这里接收到的是undefined
+				// 因为catch和then都是返回一个promise
+				console.log(result);
+				// 如果在promise.all()下处理异常，则会在catch里面接收到错误
+			})
+			.catch(err => {
+				console.log(err);
+			})
+		Promise.allSettled([request1, request2]).then(result => {
+				// 单个的promise处理了异常，那么如果有错误，这里接收到的是undefined
+				// 因为catch和then都是返回一个promise
+				console.log(result);
+				// 如果在promise.all()下处理异常，则会在catch里面接收到错误
+			})
+			.catch(err => {
+				console.log(err);
+			})
+	</script>
+</html>

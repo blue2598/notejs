@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+	</head>
+	<body>
+		<h3>私有属性 名称前加#</h3>
+		<p>子类也不能访问</p>
+		<p>使方法变私有也可加#，不同浏览器支持程度不同 如果报错可将方法声明变成属性声明</p>
+	</body>
+	<script>
+		class Host {
+			#url = "https://www.baidu.com";
+			constructor(name) {
+			    this.name = name;
+				this.#checkName();
+			}
+			set url(value) {
+				if (!/^https?:/i.test(value)) {
+					throw new Error("非法域名！")
+				}
+				this.#url = value;
+			}
+			get url(){
+				return this.#url;
+			}
+			#checkName(){
+				if(this.name.length<3){
+					throw new Error("名字长度不够") 
+				}
+			}
+		}
+		// Host.#url = "er";//rivate field '#url' must be declared in an enclosing class
+		let host = new Host("百44度");
+		host.url = "https://fas"
+		console.dir(host.name);
+		// host.#checkName()
+	</script>
+</html>

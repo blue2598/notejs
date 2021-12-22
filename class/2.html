@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			table tr td{
+				border: 1px solid #999;
+				padding: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>类的内部工作机制就是原型操作</h3>
+		<table>
+			<tr>
+				<td>区别</td>
+				<td>构造函数</td>
+				<td>类</td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td>构造函数中声明的方法会存在每个实例化的对象中，为了减少内存损耗，会将方法放入prototype中，给每个实例化的对象公用</td>
+				<td>类中的方法会自动放入prototype中</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td>放入构造函数原型中的方法默认可被forin遍历，即：enumberable：true</td>
+				<td>类中的方法不可被forin遍历</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td>构造函数中普通方法的this指向window、严格模式下是undefined</td>
+				<td>类中的普通方法的this指向undefined</td>
+			</tr>
+		</table>
+	</body>
+	<script>
+		class User{
+			age = 18;
+			constructor(name){
+				this.name = name;
+			}
+			show(){
+				return this.name
+			}
+		}
+		console.dir(User)
+		let ysl = new User("杨双林");
+		let zs = new User("张三");
+		console.dir(ysl);
+		console.dir(zs);
+		for(let key in ysl){
+			console.log("ysl:"+key);
+		}
+		console.log(Object.getOwnPropertyDescriptor(User.prototype,"show"));
+		
+		function Address(address){
+			this.address = address;
+		}
+		Address.prototype.show = function(){
+			return this.address
+		}
+		let hf = new Address("合肥");
+		console.log(Object.getOwnPropertyDescriptor(Address.prototype,"show"));
+		for(let key in hf){
+			console.log("address:"+key);
+		}
+	</script>
+</html>

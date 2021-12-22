@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+
+	</style>
+	<body>
+		<button class="prev">上一节</button>
+		<button class="next">下一节</button>
+		<div id="app">
+			<h1>筛选列表</h1>
+			<p>watch实现</p>
+			<input type="" v-model="keyword" />
+			<ul>
+				<li v-for="(item,index) in filterDataByWatch" :key="item.id">{{item.name}}-{{item.sex}}</li>
+			</ul>
+			<p>computed实现</p>
+			<input type="" v-model="keyword2" />
+			<ul>
+				<li v-for="(item,index) in filterDataByCom" :key="item.id">{{item.name}}-{{item.sex}}</li>
+			</ul>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+		<script src="./change.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			let vm = new Vue({
+				data() {
+					return {
+						keyword: "",
+						keyword2:"",
+						dataArr: [{
+							id: 1,
+							name: "ysl",
+							sex: "女"
+						}, {
+							id: 2,
+							name: "yyy",
+							sex: "女"
+						}, {
+							id: 3,
+							name: "lsy",
+							sex: "男"
+						}],
+						filterDataByWatch: [],
+					}
+				},
+				watch: {
+					keyword: {
+						immediate: true,
+						handler: function(val) {
+							this.filterDataByWatch = this.dataArr.filter(item => item.name.includes(val))
+						}
+					}
+				},
+				computed:{
+					filterDataByCom(){
+						return this.dataArr.filter(item => item.name.includes(this.keyword2))
+					}
+				}
+			});
+			vm.$mount("#app");
+		</script>
+	</body>
+</html>

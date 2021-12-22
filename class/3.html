@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+
+	</head>
+	<body>
+		<h3>静态方法</h3>
+	</body>
+	<script>
+		// 构造函数中声明静态方法
+		function User(name){
+			this.name = name;
+		}
+		User.__proto__.show = function(){
+			return this.name+"在__proto__中声明"
+		}
+		// 这样也是静态方法  只能通过User调用实例化对象不能直接用
+		// User.show = function(){
+		// 	return "把函数当对象，将方法当成一个属性值"
+		// }
+		console.log(User.show());
+		let ysl = new User("ysl");
+		// console.log(ysl.show());//ysl.show is not a function
+		// console.log(User.show.call(ysl));
+		
+		
+		// 类中声明静态方法
+		class Admin{
+			constructor(name) {
+			    this.name = name;
+			}
+			show(){
+				return "会自动放入原型链中的方法，给实例化对象公用"
+			};
+			static show = function(){
+				return this.name+"静态方法，通过当前类调用"
+			}
+		}
+		console.log(Admin.show())
+		let yyy = new Admin("yyy");
+		console.log(yyy.show());
+		console.dir(Admin.show.call(yyy));
+		
+		// 实例：需求通过create创建一个实例化对象
+		class Member{
+			constructor(name,age) {
+			    this.name = name;
+				this.age = age
+			}
+			static create(name){
+				return new Member(name)
+			}
+			// 优化写法
+			static createNice(...args){
+				return new this(...args)
+			}
+		}
+		let hy = Member.create("会员");
+		console.log(hy);
+		let good = Member.createNice("优化方法",19);
+		console.log(good);
+	</script>
+</html>

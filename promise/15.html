@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>Promise对列</h1>
+	</body>
+	<script src="js/ajax.js"></script>
+	<script>
+		let promise = Promise.resolve();
+		// 这里的每个then都等待上一个promise的状态改变才执行
+		promise = promise.then(res => {
+			return new Promise(resolve => {
+				console.log(1);
+				resolve(1)
+			})
+		})
+		promise = promise.then(res => {
+			return new Promise(resolve => {
+				setTimeout(() => {
+					console.log(2);
+					resolve(2)
+				}, 1000)
+			})
+		})
+
+		promise = promise.then(res => {
+			return new Promise(resolve => {
+				setTimeout(() => {
+					console.log(3);
+				}, 1000)
+			})
+		})
+
+		function printOut(arr) {
+			let promise = Promise.resolve();
+			arr.map(v => {
+				promise = promise.then(() => {
+					return new Promise(resolve => {
+						setTimeout(() => {
+							console.log(v);
+							resolve(v)
+						}, 1000)
+					})
+				})
+			})
+		}
+		printOut(["第一个", "第二个", "第三个", "第四个", "第五个"]);
+
+		function reduceOut(arr) {
+			let promise = Promise.resolve();
+			arr.reduce((c, v) => {
+				return c.then(() => {
+					return new Promise(resolve => {
+						setTimeout(() => {
+							console.log(v);
+							resolve(v)
+						}, 1000)
+					})
+				})
+			},promise)
+		}
+		reduceOut(["第六个", "第七个", "第八个", "第九个", "第十个"]);
+	</script>
+</html>

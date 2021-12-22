@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		
+	</head>
+	<body>
+		<h3>getter setter</h3>
+	</body>
+	<script>
+		class Config {
+			constructor(url) {
+				this.data = {url};
+			}
+			get url() {
+				return this.data.url
+			}
+			set url(value) {
+				if (value.length > 10) {
+					this.data.url = value;
+				}else{
+					// console.error("错误");
+					throw Error("错误")
+				}
+			}
+		}
+		let host = new Config("https://www.baidu.com")
+		console.log(host);
+		host.url = "hhhhhhhhhhh"
+		console.log(host);
+		console.log(host.url);
+		host.url = "1";
+		// console.log(host);
+	</script>
+</html>

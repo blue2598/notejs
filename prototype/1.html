@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h2>原型_proto_</h2>
+		<h3>存在没有原型的对象：</h3>
+		<p>使用Object.create(proto，[propertiesObject])</p>
+		<strong>proto</strong>
+		<p>新创建对象的原型</p>
+		<strong>propertiesObject</strong>
+		<p>可选。需要传入一个对象，该对象的属性类型参照Object.defineProperties()的第二个参数。如果该参数被指定且不为
+			undefined，该传入对象的自有可枚举属性(即其自身定义的属性，而不是其原型链上的枚举属性)将为新创建的对象添加指定的属性值和对应的属性描述符。</p>
+	</body>
+	<script>
+		let arr = [];
+		let arr1 = [];
+		console.log(arr);
+		let obj = {};
+		console.log(obj);
+		console.log(Object.getPrototypeOf(arr) == Object.getPrototypeOf(obj));
+		console.log(Object.getPrototypeOf(arr) == Object.getPrototypeOf(arr1));
+
+		// 创建一个没有原型的对象
+		let aloneObj = Object.create(null, {
+			name: {
+				value: "obj no proto",
+				writable: false
+			}
+		})
+		console.log(aloneObj);
+		console.log(obj.hasOwnProperty(name)); //可以用父元素的方法
+		// console.log(aloneObj.hasOwnProperty(name)); // aloneObj.hasOwnProperty is not a function
+		
+		const showInfo = {
+			printIntroduction: function() {
+				return "我的姓名是：" + this.name
+			}
+		};
+		let objNew = Object.create(showInfo, {
+			name: {
+				value: "obj has proto"
+			}
+		})
+		console.log(objNew);
+		console.log(objNew.printIntroduction());
+		
+		let objnew11 = Object.create(Object.prototype,{})
+	</script>
+</html>

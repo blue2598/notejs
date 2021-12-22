@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+		}
+
+		.tab-change {
+			width: 100%;
+			height: 100%;
+		}
+
+		.tab-title {
+			width: 100%;
+			height: 52px;
+			line-height: 52px;
+			border: 1px solid #000;
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+		}
+
+		.tab-title a {
+			min-width: 132px;
+			background-color: #2C3E50;
+			text-align: center;
+			color: #fff;
+			cursor: pointer;
+		}
+
+		.tab-title a.select-this {
+			background-color: #42B983;
+		}
+
+		section {
+			width: 100%;
+			height: calc(100vh - 52px);
+		}
+
+		section.select-this {
+			background-color: #42B983;
+		}
+	</style>
+	<body>
+		<h2>tab选项卡的实现</h2>
+		<div class="tab-change tab-change1">
+			<div class="tab tab-title">
+				<a>选项一</a>
+				<a>选项二</a>
+			</div>
+			<section>内容一</section>
+			<section>内容二</section>
+		</div>
+	</body>
+	<script>
+		function Tab(className) {
+			this.tabs = document.querySelectorAll(className + ">.tab-title");
+			this.links = document.querySelectorAll(className + " a");
+			this.sections = document.querySelectorAll(className + " section")
+		}
+		function Animation(){}
+		function extend(child,parent){
+			child.prototype = Object.create(parent.prototype);
+			child.prototype.constructor = child;
+		}
+		extend(Tab,Animation);
+		Tab.prototype.run = function() {
+			this.bindEvent();
+		}
+		Tab.prototype.bindEvent = function(){
+			this.links.forEach((el,i)=>{
+				el.addEventListener('click',()=>{
+					this.action(i);
+				})
+			})
+		}
+		Animation.prototype.showThis = function(el) {
+			el.style.display = "block";
+			el.classList.add = 'select-this';
+		}
+		Animation.prototype.hideThis = function(el) {
+			el.style.display = "none";
+		}
+		Animation.prototype.changeBg = function(el,color) {
+			el.style.backgroundColor = color;
+		}
+		Animation.prototype.reset  = function(){
+			this.sections.forEach(el=>{
+				this.hideThis(el);
+			})
+			this.links.forEach(el=>{
+				this.changeBg(el,"#2C3E50")
+			})
+		};
+		Tab.prototype.action = function(index){
+			this.reset();
+			this.showThis(this.sections[index])
+			this.changeBg(this.sections[index],"#42B983")
+			this.changeBg(this.links[index],"#ffaa00")
+		}
+		new Tab(".tab-change1").run();
+	</script>
+</html>

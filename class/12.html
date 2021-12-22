@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style>
+			* {
+				padding: 0;
+				margin: 0;
+			}
+
+			.panel {
+				height: 708px;
+				overflow: hidden;
+			}
+
+			.slide {
+				width: 400px;
+				margin: auto;
+			}
+
+			.slide p {
+				width: 100%;
+				height: 36px;
+				background-color: #ffaa00;
+				font-size: 16px;
+				text-align: center;
+				color: #fff;
+				line-height: 36px;
+				min-height: 36px;
+			}
+
+			.slide div {
+				width: 100%;
+				height: 200px;
+				background-color: #005500;
+			}
+		</style>
+	</head>
+	<body>
+		<h3>动画</h3>
+		<div class="panel">
+			<div class="slide">
+				<p>1</p>
+				<div></div>
+			</div>
+			<div class="slide">
+				<p>1</p>
+				<div></div>
+			</div>
+			<div class="slide">
+				<p>1</p>
+				<div></div>
+			</div>
+		</div>
+	</body>
+	<script>
+		class Animation {
+			constructor(el) {
+				this.el = el;
+				this.defaultH = this.height;
+			}
+			show() {
+				let timerId = setInterval(() => {
+					this.height = this.height + 1;
+					if (this.height >= this.defaultH) {
+						clearInterval(timerId)
+					}
+				}, 10)
+			}
+			hide(callback) {
+				let timerId = setInterval(() => {
+					this.height = this.height - 1;
+					if (this.height <= 0) {
+						clearInterval(timerId);
+						// 接收一个回调函数，当回调函数存在时，调用该回调函数
+						callback && callback()
+					}
+				}, 10)
+			}
+			get height() {
+				// 这里乘以1是把字符串变成数值
+				return window.getComputedStyle(this.el).height.slice(0, -2) * 1
+			}
+			set height(height) {
+				this.el.style.height = height + "px";
+			}
+		}
+		let slides = document.querySelectorAll(".slide div");
+		slides.forEach(item => {
+			let slideEl = new Animation(item);
+			slideEl.hide(() => {
+				slideEl.show();
+			})
+		})
+	</script>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<style>
+
+	</style>
+	<body>
+		<button class="prev">上一节</button>
+		<button class="next">下一节</button>
+		<div id="app">
+			<h1>生命周期</h1>
+			<p>m：{{m}}</p>
+			<button @click="m++">m++</button>
+		</div>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+		<script src="./change.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			// 		全局
+			// Vue.directive("指令名", "对象/函数")
+			let vm = new Vue({
+				data() {
+					return {
+						n: 12,
+						m: 13,
+					}
+				},
+				// 生命周期里面的this都指向vue实例
+				beforeCreate() {
+					// 还没有data，methods
+					console.log("before created:" + this.m);
+				},
+				created() {
+					// 可以使用data、methods,虚拟dom还没生成
+					console.log("created:" + this.m);
+				},
+				beforeMount() {
+					// 生成了虚拟dom，但是还没放进页面
+					console.log("beforeMount:" + this.m);
+				},
+				Mounted() {
+					// 这里可以操作真实DOM了
+					console.log("Mounted:" + this.m);
+				},
+				beforeUpdate() {
+					// 数据是新的，但是页面是旧的
+					console.log("beforeUpdate:" + this.m);
+					debugger
+				},
+				updated() {
+					// 数据是新的，页面也更新完成
+					console.log("updated:" + this.m);
+				},
+				beforeDestory() {
+					// 可以访问到data以及调用的方法，但是对数据的操作不会更新渲染到页面上
+					console.log("beforeDestory:" + this.m);
+				},
+				destroyed() {
+					// 销毁vue实例、解绑指令以及事件(自定义事件)监听器
+					console.log("destroyed:" + this.m);
+				},
+				methods: {
+
+
+				}
+			});
+			console.dir(vm);
+			vm.$mount("#app");
+		</script>
+
+	</body>
+</html>

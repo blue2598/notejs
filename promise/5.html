@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>同步任务=>微任务=>宏任务</h1>
+		<h3>同步任务、宏任务和微任务的执行顺序</h3>
+	</body>
+	<script>
+		// 顺序
+		// 同步任务=>微任务=>宏任务
+		// 立即执行和放进任务对列中等待执行
+		// eg1();
+		eg2();
+		function eg1(){
+			setTimeout(() => {
+				console.log("setTimeout是宏任务");
+			}, 0)
+			new Promise((resolve, reject) => {
+				resolve("这里有通知结果了，then才会执行");
+				console.log("Promise同步任务，立即执行");
+			}).then(res => {
+				console.log("then里面是微任务，需要有成功或者失败的结果才把这里面放入微任务队列");
+			}, err => {
+			
+			})
+			console.log("同步任务，打印立即执行");
+			for(let i=0;i<10;i++){
+				console.log(i);
+			}
+		}
+		function eg2(){
+			new Promise((resolve, reject) => {
+				setTimeout(()=>{
+					resolve()
+					console.log("promise里面的settimeout");
+				})
+			}).then(res => {
+				console.log("then里面是微任务，需要有成功或者失败的结果才把这里面放入微任务队列");
+			}, err => {
+			
+			})
+			console.log("同步任务，打印立即执行");
+		}
+	</script>
+</html>

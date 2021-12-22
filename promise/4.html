@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h3>promise</h3>
+		<h3>promise产生的是微任务队列</h3>
+		<p>定时器之类的任务是在宏任务队列中，微任务队列的任务较宏任务队列的任务先执行</p>
+	</body>
+	<script>
+		// pending
+		// fulfilled
+		// rejected
+		// then里面有两个回调函数，一个是成功时候执行，一个是失败时候
+		new Promise((resolve, reject) => {
+			resolve("成功");
+			// reject("失败");
+		}).then(res => {
+			console.log(res);
+		}, err => {
+			console.log(err);
+		}).catch(err=>{
+			console.log(err1);
+		}).then(res => {
+			console.log("再加一个任务队列");
+		}, err => {
+			console.log(err);
+		}).catch(err=>{
+			console.log(err1);
+		})
+	</script>
+</html>

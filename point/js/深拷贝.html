@@ -1,0 +1,45 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-10 10:27:52
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-10 13:13:41
+ * @FilePath: \notejs\point\js\深拷贝.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>数组和对象的深拷贝</h2>
+    <h2>打开控制台</h2>
+    <script>
+        // 数组和对象的深拷贝
+        // 循环、递归
+        function deepCopy(params) {
+            if (typeof params != 'object') return false;
+            let obj = params instanceof Array ? [] : {};
+            for (let key in params) {
+                obj[key] = typeof params[key] == 'object' ? deepCopy(params[key]) : params[key];
+            }
+            return obj;
+        }
+        let obj = { name: "1", a: { b: { c: 1 } } };
+        let newObj = deepCopy(obj);
+        newObj.name = "2";
+        newObj.a.b.c = 2;
+        console.log(JSON.stringify(obj, null, 2), "原来的");
+        console.log(JSON.stringify(newObj, null, 2), "更改了深拷贝之后的");
+        console.log(deepCopy);
+        let newF = deepCopy();
+    </script>
+</body>
+
+</html>

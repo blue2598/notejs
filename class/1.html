@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h3>类的声明</h3>
+	</body>
+	<script>
+		class User {
+			constructor(name){
+				this.name = name;
+			}
+			getName(){
+				return this.name;
+			}
+		}
+		let ysl = new User("ysl");
+		console.log(ysl.getName());
+		console.log(typeof User);
+		
+		// 构造函数声明
+		function Address(address){
+			this.address = address;
+			this.getAddress=function(){
+				return this.address;
+			}
+		}
+		let hf = new Address("合肥");
+		console.log(hf.getAddress());
+		console.log(typeof Address);
+	</script>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<h1>其他类型的Promise封装</h1>
+	</body>
+	<script>
+		// fun1();
+		// fun2();
+		fun3();
+
+		function fun1() {
+			let p1 = new Promise((resolve, reject) => {
+				resolve("成功了")
+			})
+			let p2 = p1.then(res => {
+				// 这里返回一个promise对象给下一个then使用
+				return new Promise((resolve, reject) => {
+					reject("失败")
+				})
+			}, err => {
+				console.log(err);
+			}).then(res => {
+				console.log(res);
+			}, err => {
+				console.log(err);
+			})
+		}
+
+		function fun2() {
+			let p1 = new Promise((resolve, reject) => {
+				resolve("成功了")
+			})
+			let p2 = p1.then(res => {
+				// 这里返回一个对象里有then方法  系统自动识别成promise对象
+				return {
+					then(resolve, reject) {
+						reject("失败")
+					}
+				}
+			}, err => {
+				console.log(err);
+			}).then(res => {
+				console.log(res);
+			}, err => {
+				console.log(err);
+			})
+		}
+		function fun3() {
+			let p1 = new Promise((resolve, reject) => {
+				resolve("成功了")
+			})
+			let p2 = p1.then(res => {
+				// 这里同样的效果
+				class result {
+					then(resolve, reject) {
+						reject("失败")
+					}
+				}
+				return new result();
+			}, err => {
+				console.log(err);
+			}).then(res => {
+				console.log(res);
+			}, err => {
+				console.log(err);
+			})
+		}
+	</script>
+</html>

@@ -1,0 +1,60 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: Young
+ * @Date: 2021-12-13 14:08:37
+ * @LastEditors: Do not Edit
+ * @LastEditTime: 2021-12-14 14:26:43
+ * @FilePath: \notejs\point\js\节流和防抖 copy.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>防抖：在一定时间内，无论触发了多少次函数，只在最后一次执行:</p>
+    <p>节流：一段时间内只触发一次函数</p>
+    <button id="btn1">正常</button>
+    <button id="btn2">节流</button>
+    <input type="text" name="keyword" value="防抖">
+    <script>
+        function debounce(fn, delay) {
+            let timer;
+            return function (value) {
+                clearTimeout(timer);
+                timer = setTimeout(() => {
+                    fn(arguments)
+                }, delay)
+            }
+        }
+        function showInput(value) {
+            console.log(value);
+        }
+        let input = document.querySelector("input[name='keyword']");
+        input.addEventListener('input', debounce(showInput, 1000))
+
+        function throttle(fn, duration) {
+            let previous = 0;
+            return function () {
+                let now = new Date();
+                if (now - previous > duration) {
+                    fn();
+                    previous = now;
+                }
+            }
+        }
+        function show() {
+            console.log("节流");
+        }
+        let button2 = document.querySelector("#btn2");
+        button2.addEventListener('click', throttle(show, 2000))
+    </script>
+</body>
+
+</html>
